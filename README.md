@@ -1,4 +1,4 @@
-# pid-rgb2gray
+# pid-quantizacao-uniforme
 
 Repositorio de trabalho da disciplina de Processamento de Imagens Digitais
 
