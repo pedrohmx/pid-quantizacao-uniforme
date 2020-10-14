@@ -13,7 +13,7 @@ project( pid-quantizacao-uniforme )
 include_directories( ./src )
 
 #target
-add_executable( quantizacao-uniforme  ./src/main.cpp )
+add_executable( quantizacao-uniforme  ./src/main.cpp ./src/pid_utils.cpp)
 
 add_executable( DisplayImage ./src/DisplayImage.cpp )
 target_link_libraries( DisplayImage ${OpenCV_LIBS} )
