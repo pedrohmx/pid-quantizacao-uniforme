@@ -14,7 +14,7 @@ int main(int argc, char** argv )
     
 	cv::Mat image;
     image = cv::imread( argv[1], 1 );
-    std::list<char> lDate;
+    std::list<int8_t> lDate;
     //std::ofstream aTest;
     //aTest.open("texto.txt");
     
@@ -24,26 +24,42 @@ int main(int argc, char** argv )
         return -1;
     }
     
-	//cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    //cv::imshow("Display Image", image);
-    //cv::waitKey(0);
+	cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+    cv::imshow("Display Image", image);
+    cv::waitKey(0);
 
     int i=0;
     int j=0;
-    /*for(i=0;j<;i++)
+    int matRows = image.rows;
+    int matCols = image.cols;
+    //for tipico (Funcionando)
+    for(i=0;i<matRows;i++)
     {
-        for(j=0;j<;j++)
+        for(j=0;j<matCols;j++)
         {
-            cout << image.at<int8_t>(i,j)
+            //std::cout << image.at<int8_t>(i,j);
+            lDate.push_back(image.at<int8_t>(i,j));
         }
-    }*/
-    cv::MatIterator_<char> _it = image.begin<char>();
-    for(;_it!=image.end<char>(); _it++){
-        //std::cout << *_it << std::endl;
+        /*std::cout<<std::endl<<"-------------"<<std::endl;
+        std::list<int8_t>::iterator it=lDate.begin();
+        for (; it!=lDate.end(); ++it)
+            std::cout<<*it;
+        getchar();*/
+    }
+
+    //Interator
+    /*cv::MatIterator_<int8_t> _it = image.begin<int8_t>();
+    for(;_it!=image.end<int8_t>(); _it++){
         //aTest<<*_it;
         lDate.push_back(*_it);
+        std::cout<<std::endl<<"-------------"<<std::endl;
+        std::list<int8_t>::iterator it=lDate.begin();
+        for (; it!=lDate.end(); ++it)
+            std::cout<<*it;
+        getchar();
     }
     //aTest.close();
+    */
     
 	return 0;
 }
