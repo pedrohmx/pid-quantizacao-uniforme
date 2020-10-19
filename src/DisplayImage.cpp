@@ -1,8 +1,8 @@
 #include <iostream>
+#include <list>
+#include <fstream>
 
 #include <opencv4/opencv2/opencv.hpp>
-
-//using namespace cv;
 
 int main(int argc, char** argv )
 {
@@ -14,6 +14,9 @@ int main(int argc, char** argv )
     
 	cv::Mat image;
     image = cv::imread( argv[1], 1 );
+    std::list<char> lDate;
+    //std::ofstream aTest;
+    //aTest.open("texto.txt");
     
 	if ( !image.data )
 	{
@@ -21,9 +24,26 @@ int main(int argc, char** argv )
         return -1;
     }
     
-	cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    cv::imshow("Display Image", image);
-    cv::waitKey(0);
+	//cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+    //cv::imshow("Display Image", image);
+    //cv::waitKey(0);
+
+    int i=0;
+    int j=0;
+    /*for(i=0;j<;i++)
+    {
+        for(j=0;j<;j++)
+        {
+            cout << image.at<int8_t>(i,j)
+        }
+    }*/
+    cv::MatIterator_<char> _it = image.begin<char>();
+    for(;_it!=image.end<char>(); _it++){
+        //std::cout << *_it << std::endl;
+        //aTest<<*_it;
+        lDate.push_back(*_it);
+    }
+    //aTest.close();
     
 	return 0;
 }
