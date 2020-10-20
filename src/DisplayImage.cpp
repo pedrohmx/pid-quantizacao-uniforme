@@ -34,8 +34,10 @@ int main(int argc, char** argv )
     int j=0;
     int matRows = image.rows;
     int matCols = image.cols;
-    std::cout << image.channels() << std::endl;
+    std::cout << image.channels() << std::endl << std::hex;
     std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[0]) << std::endl;
+    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[1]) << std::endl;
+    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[2]) << std::endl;
 
     //for tipico (Funcionando)
     // for(i=0;i<matRows;i++)
