@@ -4,6 +4,8 @@
 
 #include <opencv4/opencv2/opencv.hpp>
 
+typedef cv::Vec<uint8_t,3> Vec3b;
+
 int main(int argc, char** argv )
 {
     if ( argc != 2 )
@@ -24,28 +26,31 @@ int main(int argc, char** argv )
         return -1;
     }
     
-	cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    cv::imshow("Display Image", image);
-    cv::waitKey(0);
+	//cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+    //cv::imshow("Display Image", image);
+    //cv::waitKey(0);
 
     int i=0;
     int j=0;
     int matRows = image.rows;
     int matCols = image.cols;
+    std::cout << image.channels() << std::endl;
+    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[0]) << std::endl;
+
     //for tipico (Funcionando)
-    for(i=0;i<matRows;i++)
-    {
-        for(j=0;j<matCols;j++)
-        {
-            //std::cout << image.at<int8_t>(i,j);
-            lDate.push_back(image.at<int8_t>(i,j));
-        }
-        /*std::cout<<std::endl<<"-------------"<<std::endl;
-        std::list<int8_t>::iterator it=lDate.begin();
-        for (; it!=lDate.end(); ++it)
-            std::cout<<*it;
-        getchar();*/
-    }
+    // for(i=0;i<matRows;i++)
+    // {
+    //     for(j=0;j<matCols;j++)
+    //     {
+    //         std::cout << image.at<int8_t>(i,j);
+    //         lDate.push_back(image.at<int8_t>(i,j));
+    //     }
+    //     /*std::cout<<std::endl<<"-------------"<<std::endl;
+    //     std::list<int8_t>::iterator it=lDate.begin();
+    //     for (; it!=lDate.end(); ++it)
+    //         std::cout<<*it;
+    //     getchar();*/
+    // }
 
     //Interator
     /*cv::MatIterator_<int8_t> _it = image.begin<int8_t>();
