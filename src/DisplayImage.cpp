@@ -1,6 +1,6 @@
 #include <iostream>
 #include <list>
-#include <fstream>
+#include <pid_utils.hpp>
 
 #include <opencv4/opencv2/opencv.hpp>
 
@@ -16,9 +16,7 @@ int main(int argc, char** argv )
     
 	cv::Mat image;
     image = cv::imread( argv[1], 1 );
-    std::list<int8_t> lDate;
-    //std::ofstream aTest;
-    //aTest.open("texto.txt");
+    std::list<uint8_t> lDate;
     
 	if ( !image.data )
 	{
@@ -34,39 +32,21 @@ int main(int argc, char** argv )
     int j=0;
     int matRows = image.rows;
     int matCols = image.cols;
-    std::cout << image.channels() << std::endl << std::hex;
-    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[0]) << std::endl;
-    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[1]) << std::endl;
-    std::cout << static_cast<int>(image.at<cv::Vec3b>(0,0)[2]) << std::endl;
-
-    //for tipico (Funcionando)
-    // for(i=0;i<matRows;i++)
-    // {
-    //     for(j=0;j<matCols;j++)
-    //     {
-    //         std::cout << image.at<int8_t>(i,j);
-    //         lDate.push_back(image.at<int8_t>(i,j));
-    //     }
-    //     /*std::cout<<std::endl<<"-------------"<<std::endl;
-    //     std::list<int8_t>::iterator it=lDate.begin();
-    //     for (; it!=lDate.end(); ++it)
-    //         std::cout<<*it;
-    //     getchar();*/
-    // }
-
-    //Interator
-    /*cv::MatIterator_<int8_t> _it = image.begin<int8_t>();
-    for(;_it!=image.end<int8_t>(); _it++){
-        //aTest<<*_it;
-        lDate.push_back(*_it);
-        std::cout<<std::endl<<"-------------"<<std::endl;
-        std::list<int8_t>::iterator it=lDate.begin();
-        for (; it!=lDate.end(); ++it)
-            std::cout<<*it;
-        getchar();
+    uint8_t iGetIndex;
+    for(i=0;i<matRows;i++)
+    {
+         for(j=0;j<matCols;j++)
+         {
+             iGetIndex=pid::getColorIndex(image.at<cv::Vec3b>(i,j)[2],image.at<cv::Vec3b>(i,j)[1],image.at<cv::Vec3b>(i,j)[0]);
+             //iGetIndex=pid::getColorIndex(static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[2]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[1]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[0]));
+             lDate.push_back(iGetIndex);
+         }
+         /*std::cout<<std::endl<<"-------------"<<std::endl;
+         std::list<int8_t>::iterator it=lDate.begin();
+         for (; it!=lDate.end(); ++it)
+             std::cout<<*it;
+         getchar();*/
     }
-    //aTest.close();
-    */
     
 	return 0;
 }
