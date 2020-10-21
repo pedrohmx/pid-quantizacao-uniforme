@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
-#include <pid_utils.hpp>
+
+#include "pid_utils.hpp"
 
 #include <opencv4/opencv2/opencv.hpp>
 
@@ -33,11 +34,11 @@ int main(int argc, char** argv )
     int matRows = image.rows;
     int matCols = image.cols;
     uint8_t iGetIndex;
-    for(i=0;i<matRows;i++)
+    for( i = 0; i < matRows; i++)
     {
-         for(j=0;j<matCols;j++)
+         for( j = 0; j < matCols; j++)
          {
-             iGetIndex=pid::getColorIndex(image.at<cv::Vec3b>(i,j)[2],image.at<cv::Vec3b>(i,j)[1],image.at<cv::Vec3b>(i,j)[0]);
+             iGetIndex = pid::getColorIndex(image.at<cv::Vec3b>(i,j)[2],image.at<cv::Vec3b>(i,j)[1],image.at<cv::Vec3b>(i,j)[0]);
              //iGetIndex=pid::getColorIndex(static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[2]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[1]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[0]));
              lDate.push_back(iGetIndex);
          }
