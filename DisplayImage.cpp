@@ -1,8 +1,10 @@
 #include <iostream>
 #include <list>
-#include <fstream>
+#include <pid_utils.hpp>
 
 #include <opencv4/opencv2/opencv.hpp>
+
+typedef cv::Vec<uint8_t,3> Vec3b;
 
 int main(int argc, char** argv )
 {
@@ -14,9 +16,7 @@ int main(int argc, char** argv )
     
 	cv::Mat image;
     image = cv::imread( argv[1], 1 );
-    std::list<char> lDate;
-    //std::ofstream aTest;
-    //aTest.open("texto.txt");
+    std::list<uint8_t> lDate;
     
 	if ( !image.data )
 	{
@@ -30,20 +30,23 @@ int main(int argc, char** argv )
 
     int i=0;
     int j=0;
-    /*for(i=0;j<;i++)
+    int matRows = image.rows;
+    int matCols = image.cols;
+    uint8_t iGetIndex;
+    for(i=0;i<matRows;i++)
     {
-        for(j=0;j<;j++)
-        {
-            cout << image.at<int8_t>(i,j)
-        }
-    }*/
-    cv::MatIterator_<char> _it = image.begin<char>();
-    for(;_it!=image.end<char>(); _it++){
-        //std::cout << *_it << std::endl;
-        //aTest<<*_it;
-        lDate.push_back(*_it);
+         for(j=0;j<matCols;j++)
+         {
+             iGetIndex=pid::getColorIndex(image.at<cv::Vec3b>(i,j)[2],image.at<cv::Vec3b>(i,j)[1],image.at<cv::Vec3b>(i,j)[0]);
+             //iGetIndex=pid::getColorIndex(static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[2]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[1]),static_cast<uint8_t>(image.at<cv::Vec3b>(i,j)[0]));
+             lDate.push_back(iGetIndex);
+         }
+         /*std::cout<<std::endl<<"-------------"<<std::endl;
+         std::list<int8_t>::iterator it=lDate.begin();
+         for (; it!=lDate.end(); ++it)
+             std::cout<<*it;
+         getchar();*/
     }
-    //aTest.close();
     
 	return 0;
 }
