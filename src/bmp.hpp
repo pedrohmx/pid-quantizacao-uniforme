@@ -173,3 +173,64 @@ struct BMP8b
 };
 
 }
+
+
+//TESTES 
+
+
+// int main(int argc,char** argv){
+
+// 	pid::BMP8b map(51,50);
+// 	for (size_t i = 0; i < map.data.size(); i++)
+// 	{
+// 		map.data[i] = 5;
+// 	}
+	
+// 	map.write("teste.bmp");
+// 	//map.print();
+
+// 	// std::fstream file("out.bin", std::ios::binary | std::ios::out);
+
+// 	// int32_t num = 0x12345678;
+
+// 	// file.write(reinterpret_cast<char*>(&num),4);
+
+// 	// std::array<uint32_t,7> tarray = {18,55,92,128,238,201,237};
+// 	// for (size_t i = 0; i < tarray.size(); i++){
+// 	// 	std::cout << tarray[i] << " ";//pid::__red[i]
+// 	// }
+// 	// std::cout << std::endl;
+
+	
+// 	//std::fstream fout;
+// 	//fout.open("black16x16.bmp",std::ios::binary | std::ios::out);
+
+// 	// pid::BMP8b test(16,16);
+// 	// test.data.resize(16*16);
+// 	// for (size_t i = 0; i < test.data.size(); i++)
+// 	// {
+// 	// 	test.data.at(i) = 0;
+// 	// }
+	
+// 	// std::cout << test.file_header.filesize << std::endl;
+// 	//fout.write(reinterpret_cast<char*>(&test.file_header),sizeof(pid::BMPFileHeader));
+// 	//fout.write(reinterpret_cast<char*>(&test.info_header),sizeof(pid::BMPInfoHeader));
+	
+// 	// std::cout << "hello." << std::endl;
+
+// 	// std::fstream source;
+
+// 	// source.open("deletethis",std::ios::binary | std::ios::out);
+
+// 	// uint32_t var = 0x12345678;//00rrggbb
+
+// 	// if(source.is_open()){
+// 	// 	source.write(reinterpret_cast<char*>(&var),sizeof(uint32_t));
+// 	// }else{
+// 	// 	//
+// 	// 	std::cout << "Error opening file." << std::endl;
+// 	// 	exit(0);
+// 	// }
+
+// 	return 0;
+// }
