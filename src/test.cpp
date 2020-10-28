@@ -94,12 +94,16 @@ struct BMP8b
 
 		this->file_header.filesize = (
 			this->file_header.offsetdata + 
-			this->data.size()
+			static_cast<uint32_t>(height * width)
 		);
+
+		if(width % 4 != 0){
+			this->file_header.filesize += (height * (4 - this->info_header.width % 4));
+		}
 
 		this->build_color_table();
 	}
-	void write(const char *fname){
+	bool write(const char *fname){
 		std::fstream out;
 		out.open(fname, std::ios::out | std::ios::binary);
 
@@ -137,8 +141,9 @@ struct BMP8b
 			
 		}else{
 			std::cout << "Erro: não foi possivel criar o arquivo de saida." << std::endl;
-			return;
+			return false;
 		}
+		return true;
 	}
 	void print(){
 		std::cout << std::hex;
@@ -149,7 +154,6 @@ struct BMP8b
 		std::cout << std::dec << "File size: " << this->file_header.filesize << std::endl;
 		std::cout << std::dec << "Offset: " << this->file_header.offsetdata << std::endl;
 	}
-
 	void build_color_table(){
 		std::vector<uint32_t> red{//15 40 6b 96 c0 ea
 			0x00150000,
@@ -176,20 +180,18 @@ struct BMP8b
 			0x000000c0,
 			0x000000ea
 		};
-		int index;
-		//std::cout << std::hex;
 		
+		//std::cout << std::hex;
 		for (size_t r = 0; r < red.size(); r++){
 			for (size_t g = 0; g < green.size(); g++){
 				for (size_t b = 0; b < blue.size(); b++){
-					index = r * green.size() * blue.size() + g * blue.size() + b;
+					int index = r * green.size() * blue.size() + g * blue.size() + b;
 					color_table[index] = red[r] | green[g] | blue[b];
 					//std::cout << index << ":" << color_table[index] << std::endl;
 				}
 			}
 		}
 		//std::cout << std::dec;
-
 	}
 };
 
