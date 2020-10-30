@@ -36,8 +36,3 @@ uint8_t getColorIndex(uint8_t r, uint8_t g, uint8_t b){
 }
 
 }//Namespace pid
-
-// int main(void){
-// 	pid::getColorIndex(250,250,250);
-// 	return 0;
-// }

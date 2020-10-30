@@ -25,9 +25,9 @@ int main(int argc, char** argv )
         return -1;
     }
     
-	//cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    //cv::imshow("Display Image", image);
-    //cv::waitKey(0);
+	cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+    cv::imshow("Display Image", image);
+    cv::waitKey(0);
 
     int i=0;
     int j=0;
