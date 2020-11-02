@@ -14,8 +14,8 @@ int main(int argc, char** argv )
 {
     if ( argc != 2 )
 	{
-        std::cout << "usage: DisplayImage.out <Image_Path>" << std::endl;
-        return -1;
+        std::cout << "usage: " << argv[0] << " <Image_Path>" << std::endl;
+        return 0;
     }
     
 	cv::Mat image;
@@ -28,16 +28,13 @@ int main(int argc, char** argv )
         printf("No image data \n");
         return -1;
     }
-    
-	cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    cv::imshow("Display Image", image);
-    cv::waitKey(0);
 
     int i=0;
     int j=0;
     int matRows = image.rows;
     int matCols = image.cols;
     uint8_t iGetIndex;
+    
     for( i = 0; i < matRows; i++)
     {
         for( j = 0; j < matCols; j++)
@@ -46,18 +43,15 @@ int main(int argc, char** argv )
             lDate.push_back(iGetIndex);
         }
     }
-    int w,h;
-    int aux = 0;
-	std::cout << "Entre com o tamanho da imagem (width/comprimento/x) (height/altura/y):" << std::endl;
-	std::cin >>	w >> h;
-	pid::BMP8b mapc(w,h);
+
+	pid::BMP8b mapc(matCols, matRows);
 	for (size_t i = 0; i < mapc.data.size(); i++)
     {
         mapc.data[i] = lDate.front();
         lDate.pop_front();
     }
-    //std::cout<<lDate.size()<<std::endl;
-	std::string strout = "teste_" + std::to_string(w) + "x" + std::to_string(h) + ".bmp";
-	mapc.write(strout.c_str());
+
+	mapc.write("teste_out.bmp");
+
 	return 0;
 }
