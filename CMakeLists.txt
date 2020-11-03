@@ -10,6 +10,7 @@ project( pid-quantizacao-uniforme )
 
 # include
 include_directories( ./src )
+include_directories( ./include )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 include_directories( ${OpenCV_DIRS} )
 
