@@ -16,8 +16,3 @@ include_directories( ${OpenCV_DIRS} )
 #target
 add_executable( quantizacao-uniforme  ./src/main.cpp ./src/pid_utils.cpp)
 target_link_libraries( quantizacao-uniforme ${OpenCV_LIBS})
-
-add_executable( DisplayImage ./src/DisplayImage.cpp ./src/pid_utils.cpp)
-target_link_libraries( DisplayImage ${OpenCV_LIBS} )
-
-add_executable( test ./src/test.cpp ./src/pid_utils.cpp )
