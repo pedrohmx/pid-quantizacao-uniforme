@@ -23,13 +23,13 @@ int main(int argc, char** argv )
 
 	if ( !input_image.data )
 	{
-        printf("No image data \n");
+        printf("Error: could not open image\n");
         return -1;
     }
 
     cv::flip(input_image, flipped_image, 0);//flips image 
 
-    std::list<uint8_t> lDate;
+    std::list<uint8_t> data_list;
 
     int i = 0;
     int j = 0;
@@ -45,19 +45,19 @@ int main(int argc, char** argv )
                 flipped_image.at<cv::Vec3b>(i,j)[2],  //R
                 flipped_image.at<cv::Vec3b>(i,j)[1],  //G
                 flipped_image.at<cv::Vec3b>(i,j)[0]); //B
-            lDate.push_back(iGetIndex);
+            data_list.push_back(iGetIndex);
         }
     }
 
-	pid::BMP8b mapc(matCols, matRows);
+	pid::BMP8b out_bitmap(matCols, matRows);
 
-	for (size_t i = 0; i < mapc.data.size(); i++)
+	for (size_t i = 0; i < out_bitmap.data.size(); i++)
     {
-        mapc.data[i] = lDate.front();
-        lDate.pop_front();
+        out_bitmap.data[i] = data_list.front();
+        data_list.pop_front();
     }
 
-	mapc.write("teste_out.bmp");
+	out_bitmap.write("teste_out.bmp");
 
 	return 0;
 }
