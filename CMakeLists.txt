@@ -7,6 +7,7 @@ find_package( OpenCV REQUIRED )
 project( pid-quantizacao-uniforme )
 
 # flags
+set(CMAKE_CXX_STANDARD 17)
 
 # include
 include_directories( ./src )
