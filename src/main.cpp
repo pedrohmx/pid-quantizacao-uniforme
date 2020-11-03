@@ -18,33 +18,39 @@ int main(int argc, char** argv )
         return 0;
     }
     
-	cv::Mat image;
-    image = cv::imread( argv[1], 1 );
+	cv::Mat input_image, flipped_image;
+    input_image = cv::imread( argv[1], 1 );
 
-    std::list<uint8_t> lDate;
-    
-	if ( !image.data )
+	if ( !input_image.data )
 	{
         printf("No image data \n");
         return -1;
     }
 
-    int i=0;
-    int j=0;
-    int matRows = image.rows;
-    int matCols = image.cols;
+    cv::flip(input_image, flipped_image, 0);//flips image 
+
+    std::list<uint8_t> lDate;
+
+    int i = 0;
+    int j = 0;
+    int matRows = flipped_image.rows;
+    int matCols = flipped_image.cols;
     uint8_t iGetIndex;
-    
+
     for( i = 0; i < matRows; i++)
     {
         for( j = 0; j < matCols; j++)
     	{
-            iGetIndex = pid::getColorIndex(image.at<cv::Vec3b>(i,j)[2],image.at<cv::Vec3b>(i,j)[1],image.at<cv::Vec3b>(i,j)[0]);
+            iGetIndex = pid::getColorIndex(// OpenCV stores the image color information in memory as (BGR)
+                flipped_image.at<cv::Vec3b>(i,j)[2],  //R
+                flipped_image.at<cv::Vec3b>(i,j)[1],  //G
+                flipped_image.at<cv::Vec3b>(i,j)[0]); //B
             lDate.push_back(iGetIndex);
         }
     }
 
 	pid::BMP8b mapc(matCols, matRows);
+
 	for (size_t i = 0; i < mapc.data.size(); i++)
     {
         mapc.data[i] = lDate.front();
