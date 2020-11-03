@@ -21,7 +21,7 @@ int main(int argc, char** argv ){
 	
 	parser.add_argument("output")
 		.help("Path to output value (default unnamed.bmp)")
-		.default_value("unnamed.bmp");
+		.default_value(std::string("unnamed.bmp"));
 
 	try {
 		parser.parse_args(argc,argv);
@@ -33,7 +33,10 @@ int main(int argc, char** argv ){
 	}
     
 	cv::Mat input_image, flipped_image;
-    input_image = cv::imread( parser.get<std::string>("input").c_str(), 1 );
+
+    std::string input_path = parser.get<std::string>("input");
+
+    input_image = cv::imread( input_path, 1 );
 
 	if ( !input_image.data )
 	{
@@ -71,7 +74,8 @@ int main(int argc, char** argv ){
         data_list.pop_front();
     }
 
-	out_bitmap.write(parser.get<std::string>("output").c_str());
+    std::string output_path = parser.get<std::string>("output");
+	out_bitmap.write(output_path.c_str());
 
 	return 0;
 }
