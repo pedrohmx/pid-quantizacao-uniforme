@@ -20,7 +20,7 @@ int main(int argc, char** argv ){
 		.help("Path to input image.");
 	
 	parser.add_argument("output")
-		.help("Path to output value (default unnamed.bmp)")
+		.help("Path to output image (default: unnamed.bmp)")
 		.default_value(std::string("unnamed.bmp"));
 
 	try {
